@@ -1,0 +1,27 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../node_modules/.prisma/client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Contact {
+  id         Int      @id @default(autoincrement())
+  name       String
+  email      String   @unique
+  phone      String?
+  profession String?
+  createdAt  DateTime @default(now())
+}
+
+model EmailCampaign {
+  id               Int      @id @default(autoincrement())
+  subject          String
+  body             String
+  sentAt           DateTime @default(now())
+  recipientsCount  Int
+  filterProfession String?
+}
