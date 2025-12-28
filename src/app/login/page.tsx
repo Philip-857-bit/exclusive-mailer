@@ -38,76 +38,83 @@ export default function LoginPage() {
     };
 
     return (
-        <div className="min-h-screen bg-[#051a10] flex items-center justify-center p-4">
-            <div className="w-full max-w-md">
+        <div className="min-h-screen relative flex items-center justify-center p-4 overflow-hidden">
+            {/* Background */}
+            <div className="absolute inset-0 bg-[#051a10]">
+                {/* Abstract Gradients */}
+                <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-[#006633] rounded-full blur-[120px] opacity-30 animate-pulse" style={{ animationDuration: '4s' }} />
+                <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-[#EF3A05] rounded-full blur-[100px] opacity-20 animate-pulse" style={{ animationDuration: '6s' }} />
+            </div>
+
+            <div className="w-full max-w-md relative z-10">
                 <motion.div
                     initial={{ y: 20, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
-                    className="bg-white rounded-3xl p-8 shadow-2xl shadow-green-900/40 relative overflow-hidden"
+                    transition={{ duration: 0.5 }}
+                    className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 lg:p-10 shadow-2xl relative overflow-hidden"
                 >
-                    <div className="relative z-10">
-                        <div className="text-center mb-10">
-                            <div className="w-16 h-16 rounded-2xl bg-[#006633] flex items-center justify-center mx-auto mb-6 shadow-lg shadow-green-700/30">
-                                <Lock className="w-8 h-8 text-white" />
-                            </div>
-                            <h1 className="text-2xl font-bold text-gray-900 font-serif">Welcome Back</h1>
-                            <p className="text-gray-500 mt-2 text-sm">Sign in to manage your campaigns</p>
+                    <div className="text-center mb-10">
+                        {/* Logo / Icon */}
+                        <div className="w-16 h-16 mx-auto mb-6 bg-gradient-to-br from-[#006633] to-[#004d26] rounded-2xl flex items-center justify-center shadow-lg shadow-green-900/50 transform rotate-3">
+                            <Lock className="w-8 h-8 text-white" />
                         </div>
-
-                        <form onSubmit={handleLogin} className="space-y-6">
-                            <div>
-                                <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2 ml-1">Email</label>
-                                <div className="relative">
-                                    <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-                                    <input
-                                        type="email"
-                                        value={email}
-                                        onChange={(e) => setEmail(e.target.value)}
-                                        className="w-full pl-12 pr-4 py-4 bg-gray-50 border border-gray-100 rounded-xl font-medium text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#006633] transition-all"
-                                        placeholder="admin@exclusive.org"
-                                        required
-                                    />
-                                </div>
-                            </div>
-
-                            <div>
-                                <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2 ml-1">Password</label>
-                                <div className="relative">
-                                    <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-                                    <input
-                                        type="password"
-                                        value={password}
-                                        onChange={(e) => setPassword(e.target.value)}
-                                        className="w-full pl-12 pr-4 py-4 bg-gray-50 border border-gray-100 rounded-xl font-medium text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#006633] transition-all"
-                                        placeholder="••••••••"
-                                        required
-                                    />
-                                </div>
-                            </div>
-
-                            {error && (
-                                <div className="p-3 rounded-lg bg-red-50 text-red-600 text-sm font-medium text-center">
-                                    {error}
-                                </div>
-                            )}
-
-                            <button
-                                type="submit"
-                                disabled={isLoading}
-                                className="w-full bg-[#006633] hover:bg-[#005229] text-white py-4 rounded-xl font-bold shadow-xl shadow-green-900/20 transition-all flex items-center justify-center gap-2 group disabled:opacity-70 disabled:cursor-not-allowed"
-                            >
-                                {isLoading ? 'Signing In...' : 'Sign In Dashboard'}
-                                {!isLoading && <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />}
-                            </button>
-                        </form>
+                        <h1 className="text-3xl font-bold text-white font-serif mb-2 tracking-tight">DeEXCLUSIVES</h1>
+                        <p className="text-white/50 text-sm">Secure Campaign Access</p>
                     </div>
 
-                    {/* Decoration */}
-                    <div className="absolute top-0 right-0 w-64 h-64 bg-green-50 rounded-full translate-x-1/2 -translate-y-1/2 opacity-50 pointer-events-none" />
-                    <div className="absolute bottom-0 left-0 w-40 h-40 bg-orange-50 rounded-full -translate-x-1/2 translate-y-1/2 opacity-50 pointer-events-none" />
+                    <form onSubmit={handleLogin} className="space-y-5">
+                        <div className="space-y-1">
+                            <label className="text-xs font-bold text-white/60 uppercase tracking-widest ml-1">Admin Email</label>
+                            <div className="relative group">
+                                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/40 group-focus-within:text-[#00aa55] transition-colors" />
+                                <input
+                                    type="email"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    className="w-full pl-12 pr-4 py-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/20 focus:outline-none focus:bg-white/10 focus:border-[#00aa55]/50 transition-all font-medium"
+                                    placeholder="enter your email"
+                                    required
+                                />
+                            </div>
+                        </div>
+
+                        <div className="space-y-1">
+                            <label className="text-xs font-bold text-white/60 uppercase tracking-widest ml-1">Password</label>
+                            <div className="relative group">
+                                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/40 group-focus-within:text-[#00aa55] transition-colors" />
+                                <input
+                                    type="password"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    className="w-full pl-12 pr-4 py-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/20 focus:outline-none focus:bg-white/10 focus:border-[#00aa55]/50 transition-all font-medium"
+                                    placeholder="••••••••"
+                                    required
+                                />
+                            </div>
+                        </div>
+
+                        {error && (
+                            <motion.div
+                                initial={{ opacity: 0, height: 0 }}
+                                animate={{ opacity: 1, height: 'auto' }}
+                                className="p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-200 text-sm text-center"
+                            >
+                                {error}
+                            </motion.div>
+                        )}
+
+                        <button
+                            type="submit"
+                            disabled={isLoading}
+                            className="w-full bg-gradient-to-r from-[#006633] to-[#008f47] hover:from-[#005229] hover:to-[#007a3d] text-white py-4 rounded-xl font-bold shadow-lg shadow-green-900/40 transition-all flex items-center justify-center gap-2 group disabled:opacity-70 disabled:cursor-not-allowed mt-4"
+                        >
+                            {isLoading ? 'Accessing...' : 'Enter Dashboard'}
+                            {!isLoading && <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />}
+                        </button>
+                    </form>
                 </motion.div>
 
-                <p className="text-center text-gray-500 text-xs mt-8">
+                <p className="text-center text-white/30 text-xs mt-8">
                     &copy; {new Date().getFullYear()} DeExclusives Music Organization
                 </p>
             </div>
